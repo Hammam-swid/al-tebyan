@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Student } from "./student.entity.js";
-import { SubjectClassroom } from "./subjectClassroom.entity.js";
+import { Subject } from "./subject.entity.js";
 
 @Entity()
 export class Classroom {
@@ -20,12 +20,6 @@ export class Classroom {
   @OneToMany(() => Student, (student) => student.classroom)
   students: Student[];
 
-  @OneToMany((type) => SubjectClassroom, (subClass) => subClass.classroom)
-  subjects: SubjectClassroom[];
-  // @ManyToMany(() => Subject, (subject) => subject.classrooms)
-  // @JoinTable()
-  // subjects: Subject[];
-
-  // @ManyToMany(() => Teacher, (teacher) => teacher.classrooms)
-  // teachers: Teacher[];
+  @OneToMany((type) => Subject, (subject) => subject.classroom)
+  subjects: Subject[];
 }

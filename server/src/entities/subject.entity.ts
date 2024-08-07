@@ -3,12 +3,14 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  Relation,
 } from "typeorm";
 import { Classroom } from "./classroom.entity.js";
 import { Teacher } from "./teacher.entity.js";
-import { SubjectClassroom } from "./subjectClassroom.entity.js";
+import { Grade } from "./grade.entity.js";
 
 @Entity()
 export class Subject {
@@ -18,13 +20,12 @@ export class Subject {
   @Column()
   subjectName: string;
 
-  @OneToMany(() => SubjectClassroom, subClass => subClass.subject)
-  subjectClassroom : SubjectClassroom[]
+  @ManyToOne((type) => Classroom, (classroom) => classroom.subjects)
+  classroom: Relation<Classroom>;
 
-  // @ManyToMany(() => Classroom, (classroom) => classroom.subjects)
-  // classrooms: Classroom[];
+  @ManyToOne(() => Teacher, (teacher) => teacher.subject)
+  teacher: Relation<Teacher>;
 
-  // @ManyToMany(() => Teacher, (teacher) => teacher.subjects)
-  // @JoinTable()
-  // teachers: Teacher[];
+  @OneToMany(() => Grade, (grade) => grade.subject)
+  grades: Grade[];
 }

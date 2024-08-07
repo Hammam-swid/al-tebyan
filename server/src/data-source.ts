@@ -8,7 +8,7 @@ import { Student } from "./entities/student.entity.js";
 import { Classroom } from "./entities/classroom.entity.js";
 import { Subject } from "./entities/subject.entity.js";
 import { Teacher } from "./entities/teacher.entity.js";
-import { SubjectClassroom } from "./entities/subjectClassroom.entity.js";
+import { Grade } from "./entities/grade.entity.js";
 
 export const AppDataSource = new DataSource({
   type: "mysql",
@@ -19,7 +19,7 @@ export const AppDataSource = new DataSource({
   database: "al_tebyan",
   synchronize: true,
   logging: false,
-  entities: [Student, Classroom, Subject, Teacher, SubjectClassroom],
+  entities: [Student, Classroom, Subject, Teacher, Grade],
   migrations: [],
   subscribers: [],
 });

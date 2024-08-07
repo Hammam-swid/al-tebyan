@@ -1,5 +1,12 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Classroom } from "./classroom.entity.js";
+import { Grade } from "./grade.entity.js";
 
 @Entity()
 export class Student {
@@ -19,8 +26,21 @@ export class Student {
   phoneNo: string;
 
   @Column()
+  private password: string;
+
+  @Column()
+  passwordChangedAt: Date;
+
+  @Column()
   isPaid: boolean;
 
   @ManyToOne(() => Classroom, (classroom) => classroom.students)
   classroom: Classroom;
+
+  @OneToMany(() => Grade, (grade) => grade.student)
+  grades: Grade[];
+
+  setPassword(password) {
+    this.password = password;
+  }
 }
